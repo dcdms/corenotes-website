@@ -1,6 +1,7 @@
 import { CreateTaskCard } from '@/components/create-task-card'
 import { Header } from '@/components/header'
 import { TaskCard } from '@/components/task-card'
+import { TaskList } from '@/components/task-list'
 
 export default function Home() {
   return (
@@ -9,38 +10,7 @@ export default function Home() {
 
       <main className="flex flex-1 flex-col gap-10 px-24 py-6">
         <CreateTaskCard />
-
-        <div className="flex flex-col gap-8">
-          <section className="flex flex-col gap-2">
-            <h2 className="text-xs leading-none">Favorites</h2>
-
-            <ul className="grid gap-14 md:grid-cols-2 lg:grid-cols-3">
-              <li>
-                <TaskCard
-                  id="something"
-                  title="hello"
-                  description="hello"
-                  favorite={false}
-                />
-              </li>
-            </ul>
-          </section>
-
-          <section className="flex flex-col gap-2">
-            <h2 className="text-xs leading-none">Others</h2>
-
-            <ul className="grid gap-14 md:grid-cols-2 lg:grid-cols-3">
-              <li>
-                <TaskCard
-                  id="something"
-                  title="hello"
-                  description="hello"
-                  favorite={false}
-                />
-              </li>
-            </ul>
-          </section>
-        </div>
+        <TaskList />
       </main>
     </div>
   )
