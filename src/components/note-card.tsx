@@ -34,7 +34,7 @@ export function NoteCard({ note }: NoteCardProps) {
   const [editingDescription, setEditingDescription] = useState(note.description)
 
   async function handleSwitchFavorite() {
-    await server.tasks[':id'].$patch({
+    await server.notes[':id'].$patch({
       param: { id: note.id },
       json: { favorite: !note.favorite },
     })
@@ -47,7 +47,7 @@ export function NoteCard({ note }: NoteCardProps) {
   }
 
   async function handleDelete() {
-    await server.tasks[':id'].$delete({ param: { id: note.id } })
+    await server.notes[':id'].$delete({ param: { id: note.id } })
 
     queryClient.setQueryData(['notes', null], (notes: Note[]) => {
       return notes.filter((n) => n.id !== note.id)
@@ -57,7 +57,7 @@ export function NoteCard({ note }: NoteCardProps) {
   async function handleEditColor(
     color: Exclude<keyof typeof NOTE_COLOR_CLASSNAMES, 'white'>,
   ) {
-    await server.tasks[':id'].$patch({
+    await server.notes[':id'].$patch({
       param: { id: note.id },
       json: { color: color },
     })
@@ -73,7 +73,7 @@ export function NoteCard({ note }: NoteCardProps) {
       event.key === 'Enter' &&
       editingTitle
     ) {
-      await server.tasks[':id'].$patch({
+      await server.notes[':id'].$patch({
         param: { id: note.id },
         json: { title: editingTitle, description: editingDescription },
       })

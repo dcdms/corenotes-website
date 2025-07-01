@@ -12,13 +12,13 @@ export function NoteList() {
   const { data: notes } = useQuery({
     queryKey: ['notes', search],
     queryFn: async () => {
-      const response = await server.tasks.$get({
+      const response = await server.notes.$get({
         query: { search: search ?? undefined },
       })
 
       const data = await response.json()
 
-      return data.tasks
+      return data.notes
     },
   })
 

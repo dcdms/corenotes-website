@@ -22,7 +22,7 @@ export function CreateNoteCard() {
 
   async function handleKeydown(event: KeyboardEvent) {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && title) {
-      const response = await server.tasks.$post({
+      const response = await server.notes.$post({
         json: { title, description, favorite },
       })
 
