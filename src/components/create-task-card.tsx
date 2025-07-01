@@ -7,6 +7,9 @@ import { cn } from '@/helpers/cn'
 import type { Task } from '@/interfaces/task'
 import { server } from '@/server'
 
+// fix: fix inconsistent edits when searching
+// fix: increase size of tasks search
+
 export function CreateTaskCard() {
   const [title, setTitle] = useState('')
   const [favorite, setFavorite] = useState(false)
