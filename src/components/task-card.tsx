@@ -39,7 +39,7 @@ export function TaskCard({ task }: TaskCardProps) {
       json: { favorite: !task.favorite },
     })
 
-    queryClient.setQueryData(['tasks'], (tasks: Task[]) => {
+    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
       return tasks.map((t) =>
         t.id === task.id ? { ...t, favorite: !task.favorite } : t,
       )
@@ -49,7 +49,7 @@ export function TaskCard({ task }: TaskCardProps) {
   async function handleDelete() {
     await server.tasks[':id'].$delete({ param: { id: task.id } })
 
-    queryClient.setQueryData(['tasks'], (tasks: Task[]) => {
+    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
       return tasks.filter((t) => t.id !== task.id)
     })
   }
@@ -62,7 +62,7 @@ export function TaskCard({ task }: TaskCardProps) {
       json: { color: color },
     })
 
-    queryClient.setQueryData(['tasks'], (tasks: Task[]) => {
+    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
       return tasks.map((t) => (t.id === task.id ? { ...t, color } : t))
     })
   }
@@ -78,7 +78,7 @@ export function TaskCard({ task }: TaskCardProps) {
         json: { title: editingTitle, description: editingDescription },
       })
 
-      queryClient.setQueryData(['tasks'], (tasks: Task[]) => {
+      queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
         return tasks.map((t) =>
           t.id === task.id
             ? { ...t, title: editingTitle, description: editingDescription }

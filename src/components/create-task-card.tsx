@@ -25,7 +25,7 @@ export function CreateTaskCard() {
 
       const data = await response.json()
 
-      queryClient.setQueryData(['tasks'], (tasks: Task[]): Task[] => {
+      queryClient.setQueryData(['tasks', null], (tasks: Task[]): Task[] => {
         return [
           { id: data.id, title, description, color: 'white', favorite },
           ...tasks,
