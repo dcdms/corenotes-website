@@ -1,4 +1,6 @@
-export function Pencil() {
+import type { ComponentProps } from 'react'
+
+export function Pencil(props: ComponentProps<'svg'>) {
   return (
     <svg
       width={18}
@@ -6,6 +8,7 @@ export function Pencil() {
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <title>Edit</title>
 

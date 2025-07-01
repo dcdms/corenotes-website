@@ -11,6 +11,7 @@
   "dependencies": {
     "@corenotes/server": "^1.0.3",
     "@hookform/resolvers": "^5.1.1",
+    "@radix-ui/react-popover": "^1.1.14",
     "@tanstack/react-query": "^5.81.5",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
@@ -21,6 +22,7 @@
     "react-hook-form": "^7.59.0",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.1",
+    "tw-animate-css": "^1.3.4",
     "zod": "^3.25.67"
   },
   "devDependencies": {
