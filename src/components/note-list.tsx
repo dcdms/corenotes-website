@@ -2,15 +2,15 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
-import { TaskCard } from '@/components/task-card'
+import { NoteCard } from '@/components/note-card'
 import { server } from '@/server'
 
-export function TaskList() {
+export function NoteList() {
   const searchParams = useSearchParams()
   const search = searchParams.get('search')
 
-  const { data: tasks } = useQuery({
-    queryKey: ['tasks', search],
+  const { data: notes } = useQuery({
+    queryKey: ['notes', search],
     queryFn: async () => {
       const response = await server.tasks.$get({
         query: { search: search ?? undefined },
@@ -22,7 +22,7 @@ export function TaskList() {
     },
   })
 
-  if (!tasks) {
+  if (!notes) {
     return (
       <ul className="grid gap-14 md:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, index) => {
@@ -38,16 +38,16 @@ export function TaskList() {
     )
   }
 
-  const favorites: typeof tasks = []
-  const others: typeof tasks = []
+  const favorites: typeof notes = []
+  const others: typeof notes = []
 
-  for (const task of tasks!) {
-    if (task.favorite) {
-      favorites.push(task)
+  for (const note of notes) {
+    if (note.favorite) {
+      favorites.push(note)
       continue
     }
 
-    others.push(task)
+    others.push(note)
   }
 
   return (
@@ -57,9 +57,9 @@ export function TaskList() {
           <h2 className="text-xs leading-none">Favorites</h2>
 
           <ul className="grid gap-14 md:grid-cols-2 lg:grid-cols-3">
-            {favorites.map((task) => (
-              <li key={task.id}>
-                <TaskCard task={task} />
+            {favorites.map((note) => (
+              <li key={note.id}>
+                <NoteCard note={note} />
               </li>
             ))}
           </ul>
@@ -71,9 +71,9 @@ export function TaskList() {
           <h2 className="text-xs leading-none">Others</h2>
 
           <ul className="grid gap-14 md:grid-cols-2 lg:grid-cols-3">
-            {others.map((task) => (
-              <li key={task.id}>
-                <TaskCard task={task} />
+            {others.map((note) => (
+              <li key={note.id}>
+                <NoteCard note={note} />
               </li>
             ))}
           </ul>

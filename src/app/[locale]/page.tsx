@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
-import { CreateTaskCard } from '@/components/create-task-card'
+import { CreateNoteCard } from '@/components/create-note-card'
 import { Header } from '@/components/header'
-import { TaskList } from '@/components/task-list'
+import { NoteList } from '@/components/note-list'
 
 export default function Home() {
   return (
@@ -9,10 +9,10 @@ export default function Home() {
       <Header />
 
       <main className="flex flex-1 flex-col gap-10 px-24 py-6">
-        <CreateTaskCard />
+        <CreateNoteCard />
 
         <Suspense>
-          <TaskList />
+          <NoteList />
         </Suspense>
       </main>
     </div>

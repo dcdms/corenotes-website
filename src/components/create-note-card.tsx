@@ -1,34 +1,34 @@
 'use client'
 
 import { useQueryClient } from '@tanstack/react-query'
-import { type KeyboardEvent, useRef, useState } from 'react'
+import { type KeyboardEvent, useState } from 'react'
 import { Favorite } from '@/components/icons/favorite'
 import { cn } from '@/helpers/cn'
-import type { Task } from '@/interfaces/task'
+import type { Note } from '@/interfaces/note'
+import { useScopedI18n } from '@/locales/client'
 import { server } from '@/server'
 
 // fix: fix inconsistent edits when searching
 // fix: increase size of tasks search
 
-export function CreateTaskCard() {
-  const [title, setTitle] = useState('')
-  const [favorite, setFavorite] = useState(false)
+export function CreateNoteCard() {
+  const t = useScopedI18n('home.create_note_card')
 
-  const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [favorite, setFavorite] = useState(false)
 
   const queryClient = useQueryClient()
 
   async function handleKeydown(event: KeyboardEvent) {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && title) {
-      const description = descriptionTextareaRef.current!.value
-
       const response = await server.tasks.$post({
         json: { title, description, favorite },
       })
 
       const data = await response.json()
 
-      queryClient.setQueryData(['tasks', null], (tasks: Task[]): Task[] => {
+      queryClient.setQueryData(['notes', null], (tasks: Note[]): Note[] => {
         return [
           { id: data.id, title, description, color: 'white', favorite },
           ...tasks,
@@ -36,9 +36,8 @@ export function CreateTaskCard() {
       })
 
       setTitle('')
+      setDescription('')
       setFavorite(false)
-
-      descriptionTextareaRef.current!.value = ''
     }
   }
 
@@ -47,7 +46,7 @@ export function CreateTaskCard() {
       <div className="flex items-center justify-between border-[#D9D9D9] border-b px-5 py-3.5">
         <input
           className="font-bold text-sm leading-none outline-none"
-          placeholder="Refactor spaghetti"
+          placeholder={t('title_placeholder')}
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           onKeyDown={handleKeydown}
@@ -60,9 +59,10 @@ export function CreateTaskCard() {
 
       <div className="px-5 pt-3.5 pb-1">
         <textarea
-          ref={descriptionTextareaRef}
           className="min-h-16 w-full resize-none overflow-y-hidden text-sm leading-none outline-none"
-          placeholder="Untangle 400 lines of nested callbacks... or open a ramen shop instead. Both are valid careers."
+          placeholder={t('description_placeholder')}
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
           onKeyDown={handleKeydown}
         />
       </div>

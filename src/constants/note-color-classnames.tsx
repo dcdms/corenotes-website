@@ -1,4 +1,4 @@
-export const TASK_COLOR_CLASSNAMES = {
+export const NOTE_COLOR_CLASSNAMES = {
   white: 'bg-white',
   light_blue: 'bg-[#BAE2FF]',
   mint_green: 'bg-[#B9FFDD]',

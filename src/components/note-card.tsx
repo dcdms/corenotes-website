@@ -11,59 +11,59 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { TASK_COLOR_CLASSNAMES } from '@/constants/task-color-classnames'
+import { NOTE_COLOR_CLASSNAMES } from '@/constants/note-color-classnames'
 import { cn } from '@/helpers/cn'
-import type { Task } from '@/interfaces/task'
+import type { Note } from '@/interfaces/note'
 import { server } from '@/server'
 
 const colors = Object.keys(
-  TASK_COLOR_CLASSNAMES,
-) as (keyof typeof TASK_COLOR_CLASSNAMES)[]
+  NOTE_COLOR_CLASSNAMES,
+) as (keyof typeof NOTE_COLOR_CLASSNAMES)[]
 
-interface TaskCardProps {
-  task: Task
+interface NoteCardProps {
+  note: Note
 }
 
-export function TaskCard({ task }: TaskCardProps) {
+export function NoteCard({ note }: NoteCardProps) {
   const queryClient = useQueryClient()
 
   const [isEditColorPopoverOpen, setIsEditColorPopoverOpen] = useState(false)
   const [isEditingDetails, setIsEditingDetails] = useState(false)
 
-  const [editingTitle, setEditingTitle] = useState(task.title)
-  const [editingDescription, setEditingDescription] = useState(task.description)
+  const [editingTitle, setEditingTitle] = useState(note.title)
+  const [editingDescription, setEditingDescription] = useState(note.description)
 
   async function handleSwitchFavorite() {
     await server.tasks[':id'].$patch({
-      param: { id: task.id },
-      json: { favorite: !task.favorite },
+      param: { id: note.id },
+      json: { favorite: !note.favorite },
     })
 
-    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
-      return tasks.map((t) =>
-        t.id === task.id ? { ...t, favorite: !task.favorite } : t,
+    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
+      return notes.map((n) =>
+        n.id === note.id ? { ...n, favorite: !note.favorite } : n,
       )
     })
   }
 
   async function handleDelete() {
-    await server.tasks[':id'].$delete({ param: { id: task.id } })
+    await server.tasks[':id'].$delete({ param: { id: note.id } })
 
-    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
-      return tasks.filter((t) => t.id !== task.id)
+    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
+      return notes.filter((n) => n.id !== note.id)
     })
   }
 
   async function handleEditColor(
-    color: Exclude<keyof typeof TASK_COLOR_CLASSNAMES, 'white'>,
+    color: Exclude<keyof typeof NOTE_COLOR_CLASSNAMES, 'white'>,
   ) {
     await server.tasks[':id'].$patch({
-      param: { id: task.id },
+      param: { id: note.id },
       json: { color: color },
     })
 
-    queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
-      return tasks.map((t) => (t.id === task.id ? { ...t, color } : t))
+    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
+      return notes.map((n) => (n.id === note.id ? { ...n, color } : n))
     })
   }
 
@@ -74,15 +74,15 @@ export function TaskCard({ task }: TaskCardProps) {
       editingTitle
     ) {
       await server.tasks[':id'].$patch({
-        param: { id: task.id },
+        param: { id: note.id },
         json: { title: editingTitle, description: editingDescription },
       })
 
-      queryClient.setQueryData(['tasks', null], (tasks: Task[]) => {
-        return tasks.map((t) =>
-          t.id === task.id
-            ? { ...t, title: editingTitle, description: editingDescription }
-            : t,
+      queryClient.setQueryData(['notes', null], (notes: Note[]) => {
+        return notes.map((n) =>
+          n.id === note.id
+            ? { ...n, title: editingTitle, description: editingDescription }
+            : n,
         )
       })
 
@@ -94,13 +94,13 @@ export function TaskCard({ task }: TaskCardProps) {
     <div
       className={cn(
         'flex h-[27.375rem] flex-col rounded-3xl shadow-[2px,2px,3px,rgba(0,0,0,0.25)]',
-        TASK_COLOR_CLASSNAMES[task.color],
+        NOTE_COLOR_CLASSNAMES[note.color],
       )}
     >
       <div
         className={cn(
           'flex items-center justify-between border-[#D9D9D9] border-b px-5 py-3.5',
-          task.color !== 'white' && 'border-white',
+          note.color !== 'white' && 'border-white',
         )}
       >
         {isEditingDetails ? (
@@ -111,11 +111,11 @@ export function TaskCard({ task }: TaskCardProps) {
             onKeyDown={handleEditingFieldsKeydown}
           />
         ) : (
-          <h3 className="font-bold text-sm leading-none">{task.title}</h3>
+          <h3 className="font-bold text-sm leading-none">{note.title}</h3>
         )}
 
         <button type="button" onClick={handleSwitchFavorite}>
-          <Favorite className={cn(!task.favorite && 'fill-none')} />
+          <Favorite className={cn(!note.favorite && 'fill-none')} />
         </button>
       </div>
 
@@ -129,7 +129,7 @@ export function TaskCard({ task }: TaskCardProps) {
           />
         ) : (
           <p className="break-words text-[#4F4F4D] text-sm leading-none">
-            {task.description}
+            {note.description}
           </p>
         )}
       </div>
@@ -170,7 +170,7 @@ export function TaskCard({ task }: TaskCardProps) {
                     onClick={() => handleEditColor(color)}
                     className={cn(
                       'size-9 rounded-full',
-                      TASK_COLOR_CLASSNAMES[color],
+                      NOTE_COLOR_CLASSNAMES[color],
                     )}
                   />
                 ))}

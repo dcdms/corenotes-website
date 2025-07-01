@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { X } from '@/components/icons/x'
-import { TasksSearch } from '@/components/tasks-search'
+import { NotesSearch } from '@/components/notes-search'
 
 export function Header() {
   return (
@@ -16,7 +16,7 @@ export function Header() {
         </h1>
 
         <Suspense>
-          <TasksSearch />
+          <NotesSearch />
         </Suspense>
       </div>
 
