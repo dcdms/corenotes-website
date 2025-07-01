@@ -28,10 +28,10 @@ export function CreateNoteCard() {
 
       const data = await response.json()
 
-      queryClient.setQueryData(['notes', null], (tasks: Note[]): Note[] => {
+      queryClient.setQueryData(['notes', null], (notes: Note[]): Note[] => {
         return [
           { id: data.id, title, description, color: 'white', favorite },
-          ...tasks,
+          ...notes,
         ]
       })
 

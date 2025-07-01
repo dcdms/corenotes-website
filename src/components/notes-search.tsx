@@ -26,9 +26,9 @@ export function NotesSearch() {
   }, 300)
 
   return (
-    <div className="ml-5 flex h-7 w-full max-w-[33.125rem] items-center justify-between gap-2.5 rounded-sm border border-[#D9D9D9] px-2.5 shadow-[1px,1px,3px,rgba(0,0,0,0.25)]">
+    <div className="ml-5 flex w-full max-w-[33.125rem] items-center justify-between gap-2.5 rounded-md border border-[#D9D9D9] p-2 shadow-[1px,1px,3px,rgba(0,0,0,0.25)]">
       <input
-        className="flex-1 text-[0.625rem] leading-none outline-none placeholder:text-[#9A9A9A]"
+        className="flex-1 text-sm leading-none outline-none placeholder:text-[#9A9A9A]"
         placeholder={t('placeholder')}
         defaultValue={search ?? undefined}
         onChange={(event) => handleSearch(event.target.value)}
