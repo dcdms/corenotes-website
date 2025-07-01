@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@corenotes/server": "^1.0.3",
     "@hookform/resolvers": "^5.1.1",
     "@radix-ui/react-popover": "^1.1.14",
     "@tanstack/react-query": "^5.81.5",
@@ -28,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
+    "@corenotes/server": "^1.0.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@corenotes/server':
-        specifier: ^1.0.3
-        version: 1.0.3(@sinclair/typebox@0.34.37)(openapi-types@12.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@hookform/resolvers':
         specifier: ^5.1.1
         version: 5.1.1(react-hook-form@7.59.0(react@19.1.0))
@@ -60,6 +57,9 @@ importers:
       '@biomejs/biome':
         specifier: ^2.0.6
         version: 2.0.6
+      '@corenotes/server':
+        specifier: ^1.0.4
+        version: 1.0.4(@sinclair/typebox@0.34.37)(openapi-types@12.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.11
@@ -146,8 +146,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@corenotes/server@1.0.3':
-    resolution: {integrity: sha512-7SCtN/v/Ofi8M/rglGtD8ksUHmxx1lNVZgvNYYleD6r7n/Aw9gdTtIfZoDe4QIxP3jm3124Pyjyie7XoeOIbsA==}
+  '@corenotes/server@1.0.4':
+    resolution: {integrity: sha512-AEZ9VUft/DfeUFqKSPbClymAMuaAJeH/t4iGqI3dRmp1CDqpNhnvsmzsAeqfVXqP8ch1BmwevuEWvJ1v6FmKcA==}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -1498,7 +1498,7 @@ snapshots:
   '@biomejs/cli-win32-x64@2.0.6':
     optional: true
 
-  '@corenotes/server@1.0.3(@sinclair/typebox@0.34.37)(openapi-types@12.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@corenotes/server@1.0.4(@sinclair/typebox@0.34.37)(openapi-types@12.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@biomejs/biome': 2.0.6
       '@hono/node-server': 1.14.4(hono@4.8.3)

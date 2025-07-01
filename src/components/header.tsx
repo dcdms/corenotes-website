@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Suspense } from 'react'
 import { X } from '@/components/icons/x'
 import { TasksSearch } from '@/components/tasks-search'
 
@@ -14,7 +15,9 @@ export function Header() {
           CoreNotes
         </h1>
 
-        <TasksSearch />
+        <Suspense>
+          <TasksSearch />
+        </Suspense>
       </div>
 
       <X className="shrink-0" />
