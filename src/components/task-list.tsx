@@ -1,16 +1,23 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
 import { TaskCard } from '@/components/task-card'
 import { server } from '@/server'
 
 export function TaskList() {
-  const { data: tasks } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: async () => {
-      const response = await server.tasks.$get({ query: {} })
-      const data = await response.json()
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
 
+  const { data: tasks } = useQuery({
+    queryKey: ['tasks', search],
+    queryFn: async () => {
+      const response = await server.tasks.$get({
+        query: { search: search ?? undefined },
+      })
+
+      const data = await response.json()
+      
       return data.tasks
     },
   })

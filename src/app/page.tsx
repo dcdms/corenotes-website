@@ -1,6 +1,5 @@
 import { CreateTaskCard } from '@/components/create-task-card'
 import { Header } from '@/components/header'
-import { TaskCard } from '@/components/task-card'
 import { TaskList } from '@/components/task-list'
 
 export default function Home() {

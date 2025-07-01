@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Search } from '@/components/icons/search'
 import { X } from '@/components/icons/x'
+import { TasksSearch } from '@/components/tasks-search'
 
 export function Header() {
   return (
@@ -14,13 +14,7 @@ export function Header() {
           CoreNotes
         </h1>
 
-        <div className="ml-5 flex h-7 w-full max-w-[33.125rem] items-center justify-between gap-2.5 rounded-sm border border-[#D9D9D9] px-2.5 shadow-[1px,1px,3px,rgba(0,0,0,0.25)]">
-          <input
-            className="flex-1 text-[0.625rem] leading-none outline-none placeholder:text-[#9A9A9A]"
-            placeholder="Search notes"
-          />
-          <Search />
-        </div>
+        <TasksSearch />
       </div>
 
       <X className="shrink-0" />
