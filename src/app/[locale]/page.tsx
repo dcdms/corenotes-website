@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-[#F0FAF5] text-[#333333]">
       <Header />
 
-      <main className="flex flex-1 flex-col gap-10 px-24 py-6">
+      <main className="flex flex-1 flex-col gap-10 px-6 py-6 md:px-10 xl:px-24">
         <CreateNoteCard />
 
         <Suspense>

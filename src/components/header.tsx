@@ -5,7 +5,7 @@ import { NotesSearch } from '@/components/notes-search'
 
 export function Header() {
   return (
-    <header className="flex h-14 items-center justify-between gap-4 bg-white px-6 shadow-[0_1px_8px_rgba(149,149,149,0.25)] lg:px-9">
+    <header className="flex h-14 items-center justify-between gap-3 bg-white px-6 shadow-[0_1px_8px_rgba(149,149,149,0.25)] lg:px-9">
       <div className="flex flex-1 items-center">
         <div className="relative size-7.5 shrink-0 md:size-9">
           <Image src="/icon.png" alt="Logo" fill />
