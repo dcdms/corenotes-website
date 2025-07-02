@@ -59,7 +59,7 @@ export function CreateNoteCard() {
       <div className="flex h-10 items-center justify-end px-5">
         {title && (
           <div className="border-2 border-[#4F4F4D]/80 p-1 font-medium text-[#4F4F4D]/80 text-xs leading-none">
-            CTRL ENTER TO SUBMIT
+            {t('submit_hint_text')}
           </div>
         )}
       </div>

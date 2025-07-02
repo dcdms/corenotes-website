@@ -10,6 +10,7 @@ const home = {
     title_placeholder: 'Refactor spaghetti',
     description_placeholder:
       'Untangle 400 lines of nested callbacks... or open a ramen shop. Both are valid careers.',
+    submit_hint_text: 'CTRL ENTER TO SUBMIT'
   },
 } as const
 
