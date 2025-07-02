@@ -3,17 +3,34 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { NoteCard } from '@/components/note-card'
+import { NOTE_COLORS } from '@/constants/note-colors'
+import { parseAsBoolean } from '@/helpers/parse-as-boolean'
+import { parseAsEnum } from '@/helpers/parse-as-enum'
 import { server } from '@/server'
+import type { UnionArray } from '@/types/union-array'
 
 export function NoteList() {
   const searchParams = useSearchParams()
+
   const search = searchParams.get('search')
+  const favorite = parseAsBoolean(searchParams.get('favorite'))
+
+  const color = parseAsEnum(
+    searchParams.get('color'),
+    NOTE_COLORS as unknown as UnionArray<typeof NOTE_COLORS>,
+  )
 
   const { data: notes } = useQuery({
-    queryKey: ['notes', search],
+    queryKey: ['notes', search, color, favorite],
     queryFn: async () => {
       const response = await server.notes.$get({
-        query: { search: search ?? undefined },
+        query: {
+          search: search ?? undefined,
+          color: color ?? undefined,
+          favorite: favorite
+            ? (String(favorite) as 'true' | 'false')
+            : undefined,
+        },
       })
 
       const data = await response.json()

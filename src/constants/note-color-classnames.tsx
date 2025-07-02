@@ -1,4 +1,9 @@
-export const NOTE_COLOR_CLASSNAMES = {
+import type { NOTE_COLORS } from '@/constants/note-colors'
+
+export const NOTE_COLOR_CLASSNAMES: Record<
+  (typeof NOTE_COLORS)[number],
+  string
+> = {
   white: 'bg-white',
   light_blue: 'bg-[#BAE2FF]',
   mint_green: 'bg-[#B9FFDD]',
