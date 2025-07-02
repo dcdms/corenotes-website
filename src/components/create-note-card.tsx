@@ -4,12 +4,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { type KeyboardEvent, useState } from 'react'
 import { Favorite } from '@/components/icons/favorite'
 import { cn } from '@/helpers/cn'
-import type { Note } from '@/interfaces/note'
 import { useScopedI18n } from '@/locales/client'
 import { server } from '@/server'
-
-// fix: fix inconsistent edits when searching
-// fix: increase size of tasks search
 
 export function CreateNoteCard() {
   const t = useScopedI18n('home.create_note_card')
@@ -22,18 +18,11 @@ export function CreateNoteCard() {
 
   async function handleKeydown(event: KeyboardEvent) {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && title) {
-      const response = await server.notes.$post({
+      await server.notes.$post({
         json: { title, description, favorite },
       })
 
-      const data = await response.json()
-
-      queryClient.setQueryData(['notes', null], (notes: Note[]): Note[] => {
-        return [
-          { id: data.id, title, description, color: 'white', favorite },
-          ...notes,
-        ]
-      })
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
 
       setTitle('')
       setDescription('')

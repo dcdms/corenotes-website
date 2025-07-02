@@ -1,6 +1,6 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { NoteCard } from '@/components/note-card'
 import { NOTE_COLORS } from '@/constants/note-colors'
@@ -22,6 +22,7 @@ export function NoteList() {
 
   const { data: notes } = useQuery({
     queryKey: ['notes', search, color, favorite],
+    placeholderData: keepPreviousData,
     queryFn: async () => {
       const response = await server.notes.$get({
         query: {
@@ -34,7 +35,6 @@ export function NoteList() {
       })
 
       const data = await response.json()
-
       return data.notes
     },
   })

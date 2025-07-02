@@ -39,19 +39,12 @@ export function NoteCard({ note }: NoteCardProps) {
       json: { favorite: !note.favorite },
     })
 
-    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
-      return notes.map((n) =>
-        n.id === note.id ? { ...n, favorite: !note.favorite } : n,
-      )
-    })
+    queryClient.invalidateQueries({ queryKey: ['notes'] })
   }
 
   async function handleDelete() {
     await server.notes[':id'].$delete({ param: { id: note.id } })
-
-    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
-      return notes.filter((n) => n.id !== note.id)
-    })
+    queryClient.invalidateQueries({ queryKey: ['notes'] })
   }
 
   async function handleEditColor(
@@ -62,9 +55,7 @@ export function NoteCard({ note }: NoteCardProps) {
       json: { color: color },
     })
 
-    queryClient.setQueryData(['notes', null], (notes: Note[]) => {
-      return notes.map((n) => (n.id === note.id ? { ...n, color } : n))
-    })
+    queryClient.invalidateQueries({ queryKey: ['notes'] })
   }
 
   async function handleEditingFieldsKeydown(event: KeyboardEvent) {
@@ -77,15 +68,8 @@ export function NoteCard({ note }: NoteCardProps) {
         param: { id: note.id },
         json: { title: editingTitle, description: editingDescription },
       })
-
-      queryClient.setQueryData(['notes', null], (notes: Note[]) => {
-        return notes.map((n) =>
-          n.id === note.id
-            ? { ...n, title: editingTitle, description: editingDescription }
-            : n,
-        )
-      })
-
+      
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
       setIsEditingDetails(false)
     }
   }
