@@ -3,6 +3,8 @@ import { hc } from 'hono/client'
 
 export const server = hc<AppType>(process.env.NEXT_PUBLIC_API_BASE_URL!, {
   fetch: async (input: RequestInfo | URL, init?: RequestInit) => {
+    console.log(init)
+
     const response = await fetch(input, {
       method: init?.method ?? 'GET',
       body: init?.body ?? null,
