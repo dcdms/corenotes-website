@@ -1,7 +1,7 @@
 const home = {
   dropdown_menu: {
     switch_language_text: 'Mudar para Inglês',
-    logout_text: 'Sair', 
+    logout_text: 'Sair',
   },
   notes_search: {
     placeholder: 'Pesquisar notas',
@@ -11,7 +11,6 @@ const home = {
     description_placeholder:
       'Desfazer 400 linhas de callbacks aninhados... ou abrir uma casa de lámen. Ambas são carreiras válidas.',
   },
-  
 } as const
 
 export { home }

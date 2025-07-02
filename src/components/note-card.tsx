@@ -68,7 +68,7 @@ export function NoteCard({ note }: NoteCardProps) {
         param: { id: note.id },
         json: { title: editingTitle, description: editingDescription },
       })
-      
+
       queryClient.invalidateQueries({ queryKey: ['notes'] })
       setIsEditingDetails(false)
     }
