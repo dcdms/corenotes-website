@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { X } from '@/components/icons/x'
+import { HeaderDropdownMenu } from '@/components/header-dropdown-menu'
 import { NotesSearch } from '@/components/notes-search'
 
 export function Header() {
@@ -20,7 +20,7 @@ export function Header() {
         </Suspense>
       </div>
 
-      <X className="shrink-0" />
+      <HeaderDropdownMenu />
     </header>
   )
 }

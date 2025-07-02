@@ -1,4 +1,8 @@
 const home = {
+  dropdown_menu: {
+    switch_language_text: 'Mudar para Inglês',
+    logout_text: 'Sair', 
+  },
   notes_search: {
     placeholder: 'Pesquisar notas',
   },
